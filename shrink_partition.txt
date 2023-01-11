@@ -1,0 +1,2 @@
+select volume C:
+shrink desired=%new_size%

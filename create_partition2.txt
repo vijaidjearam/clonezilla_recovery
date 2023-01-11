@@ -1,0 +1,4 @@
+select volume C:
+create partition primary size=%partition2_size%
+format fs=ntfs
+label=%partition2_label%
