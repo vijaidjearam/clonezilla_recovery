@@ -1,4 +1,7 @@
-select volume C:
-create partition primary size=%partition1_size%
-format fs=ntfs
-label=%partition1_label%
+select disk 0
+select volume=c
+shrink desired=%partition1_size%
+create partition primary 
+format quick fs=ntfs label="%partition1_label%"
+assign letter=Y
+exit
