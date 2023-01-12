@@ -9,10 +9,10 @@ set partition1_label=clonezilla
 set partition2_label=backup
 
 :: Create the first new partition
-C:\Windows\System32\cmd.exe /c "C:\Windows\System32\diskpart.exe /s create_partition1.txt"
+C:\Windows\System32\cmd.exe /c "C:\Windows\System32\diskpart.exe /s %~dp0create_partition1.txt"
 
 :: Create the second new partition
-C:\Windows\System32\cmd.exe /c "C:\Windows\System32\diskpart.exe /s create_partition2.txt"
+C:\Windows\System32\cmd.exe /c "C:\Windows\System32\diskpart.exe /s %~dp0create_partition2.txt"
 
 :: Create the "images" folder
 md "Z:\images"
