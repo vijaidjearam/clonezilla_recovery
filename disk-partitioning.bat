@@ -49,5 +49,5 @@ del Tut142_CloneZilla_UEFI_Restore.zip
 :: copy files from Tut142_CloneZilla_UEFI_Restore to clonezilla partition
 robocopy c:\temp Y:\EFI\boot\ /E
 
-:: Exit the script
-exit
+:: Pause the script
+Pause
