@@ -59,16 +59,16 @@ Copy-Item -Recurse -Path C:\temp\clonezilla-live\EFI -Destination y:\ -Force
 Copy-Item -Recurse -Path C:\temp\clonezilla-live\live -Destination y:\ -Force
 
 #Download the modified EFI and grub.cfg file from github repo
-$url = "https://raw.githubusercontent.com/vijaidjearam/clonezilla_recovery/main/Tut142_CloneZilla_UEFI_Restore.zip"
-$fileName = "Tut142_CloneZilla_UEFI_Restore.zip"
+$url = "https://codeload.github.com/vijaidjearam/clonezilla_recovery/zip/refs/heads/main"
+$fileName = "clonezilla_recovery.zip"
 Invoke-WebRequest -Uri $url -OutFile c:\temp\$fileName
 
 #Extract the files and remove the zip file
-Expand-Archive -LiteralPath c:\temp\$fileName -DestinationPath C:\temp\Tut142_CloneZilla_UEFI_Restore
+Expand-Archive -LiteralPath c:\temp\$fileName -DestinationPath C:\temp\clonezilla_recovery
 Remove-Item C:\temp\$fileName
 
 #Copy the necessary files to clonezilla partition Y:\EFI\boot
-Copy-Item -Recurse -Path C:\temp\Tut142_CloneZilla_UEFI_Restore\Tut142_CloneZilla_UEFI_Restore\* -Destination Y:\EFI\boot\ -Force
+Copy-Item -Recurse -Path C:\temp\clonezilla_recovery\clonezilla_recovery-main\Tut142_CloneZilla_UEFI_Restore\* -Destination Y:\EFI\boot\ -Force
 
 # removing the temp folder
 Remove-Item -Recurse -Path C:\temp -Force
