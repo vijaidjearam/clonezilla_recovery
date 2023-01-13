@@ -31,7 +31,7 @@ New-Item -Path Z:\ -Name backup.tag -Force
 New-Item -ItemType Directory -Path Z:\ -Name images -Force
 
 #creating a file clonezilla.tag just to identify the correct partition when adding bootmenu entry via BIOS
-New-Item -Path Z:\ -Name clonezilla.tag -Force
+New-Item -Path Y:\ -Name clonezilla.tag -Force
  
 #create a temp directory 
 $path = "C:\temp"
