@@ -25,6 +25,13 @@ New-Partition -DiskNumber 0 -Size $partitionsize -DriveLetter Z | Format-Volume 
 
 #Start the Shell HW Detection which was disabled
 Start-Service -Name ShellHWDetection
+
+#creating backup.tag and images folder in the backup partition
+New-Item -Path Z:\ -Name backup.tag -Force
+New-Item -ItemType Directory -Path Z:\ -Name images -Force
+
+#creating a file clonezilla.tag just to identify the correct partition when adding bootmenu entry via BIOS
+New-Item -Path Z:\ -Name clonezilla.tag -Force
  
 #create a temp directory 
 $path = "C:\temp"
