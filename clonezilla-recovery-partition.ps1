@@ -16,10 +16,10 @@ Write-Host "Partition Space for recovery : $partitionsize GB"
 
  
  #Create a new partition called clonezilla with a size of 500 MB and format it as FAT32 
-New-Partition -DiskNumber 0 -Size 500MB -DriveLetter Y | Format-Volume -FileSystem FAT32 -NewFileSystemLabel "clonezilla"  
+New-Partition -DiskNumber 0 -Size 500MB -DriveLetter Y | Format-Volume -FileSystem FAT32 -NewFileSystemLabel "clonezilla" -confirm:$False   
  
  #Create a new partition called backup with a size value of $partitionsize and format it as NTFS 
-New-Partition -DiskNumber 0 -Size $partitionsize -DriveLetter Z | Format-Volume -FileSystem NTFS -NewFileSystemLabel "backup"
+New-Partition -DiskNumber 0 -Size $partitionsize -DriveLetter Z | Format-Volume -FileSystem NTFS -NewFileSystemLabel "backup" -confirm:$False 
 
 #create a temp directory 
 $path = "C:\temp"
