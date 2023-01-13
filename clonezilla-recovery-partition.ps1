@@ -8,19 +8,24 @@ Write-Host "Partition Space for recovery : $partitionsize GB"
 
 
 #Shrink existing partition C to create new partitions
- $drive = Get-Partition -DriveLetter C 
- $size = $drive.Size 
- $newSize = $size - (500MB + $partitionsize)
- Write-Host "New c partition Size  : $newSize GB"
- Resize-Partition -DriveLetter C -Size $newSize  
+$drive = Get-Partition -DriveLetter C 
+$size = $drive.Size 
+$newSize = $size - (500MB + $partitionsize)
+Write-Host "New c partition Size  : $newSize GB"
+Resize-Partition -DriveLetter C -Size $newSize  
 
+#Stop the Shell HW Detection temporarily so that it doesnt prompt for format drive 
+Stop-Service -Name ShellHWDetection
  
- #Create a new partition called clonezilla with a size of 500 MB and format it as FAT32 
+#Create a new partition called clonezilla with a size of 500 MB and format it as FAT32 
 New-Partition -DiskNumber 0 -Size 500MB -DriveLetter Y | Format-Volume -FileSystem FAT32 -NewFileSystemLabel "clonezilla" -Confirm:$False   
  
- #Create a new partition called backup with a size value of $partitionsize and format it as NTFS 
+#Create a new partition called backup with a size value of $partitionsize and format it as NTFS 
 New-Partition -DiskNumber 0 -Size $partitionsize -DriveLetter Z | Format-Volume -FileSystem NTFS -NewFileSystemLabel "backup" -Confirm:$False 
 
+#Start the Shell HW Detection which was disabled
+Start-Service -Name ShellHWDetection
+ 
 #create a temp directory 
 $path = "C:\temp"
 If(!(test-path -PathType container $path))
