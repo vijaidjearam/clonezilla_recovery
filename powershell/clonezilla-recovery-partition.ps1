@@ -1,17 +1,20 @@
-#Claculate the required space for recovery volume (allocating 1/3 of used space)
+#Calculate the required space for recovery volume (allocating 1/3 of used space)
 $Drive = "C:"
 $DriveInfo = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='$Drive'"
-$UsedSpace = (($DriveInfo.Size - $DriveInfo.FreeSpace) / 1GB) 
-Write-Host "Used Space on $Drive : $UsedSpace"
-$partitionsize = ((($DriveInfo.Size - $DriveInfo.FreeSpace) / 1GB) * 0.333333333333333GB)
-Write-Host "Partition Space for recovery : $partitionsize GB"
+$UsedSpace = ($DriveInfo.Size - $DriveInfo.FreeSpace)
+$usedspaceformatted = "{0:N2} Gb" -f ($UsedSpace/ 1Gb)
+Write-Host "Used Space on $Drive : $usedspaceformatted GB"
+$partitionsize = $UsedSpace*(2/3) 
+$partitionsizeformatted = "{0:N2} Gb" -f ($partitionsize/ 1Gb)
+Write-Host "Partition Space for recovery : $partitionsizeformatted GB"
 
 
 #Shrink existing partition C to create new partitions
 $drive = Get-Partition -DriveLetter C 
 $size = $drive.Size 
 $newSize = $size - (500MB + $partitionsize)
-Write-Host "New c partition Size  : $newSize GB"
+$newSizeformatted = "{0:N2} Gb" -f ($newSize/ 1Gb)
+Write-Host "New c partition Size  : $newSizeformatted GB"
 Resize-Partition -DriveLetter C -Size $newSize  
 
 #Stop the Shell HW Detection temporarily so that it doesnt prompt for format drive 
