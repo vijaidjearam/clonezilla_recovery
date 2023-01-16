@@ -3,28 +3,32 @@ $Drive = "C:"
 $DriveInfo = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='$Drive'"
 $UsedSpace = ($DriveInfo.Size - $DriveInfo.FreeSpace)
 $usedspaceformatted = "{0:N2} Gb" -f ($UsedSpace/ 1Gb)
-Write-Host "Used Space on $Drive : $usedspaceformatted GB"
+Write-Host "Used Space on $Drive : $usedspaceformatted"
 $partitionsize = $UsedSpace*(2/3) 
 $partitionsizeformatted = "{0:N2} Gb" -f ($partitionsize/ 1Gb)
-Write-Host "Partition Space for recovery : $partitionsizeformatted GB"
-
+Write-Host "Partition Space for recovery : $partitionsizeformatted"
+pause
 
 #Shrink existing partition C to create new partitions
 $drive = Get-Partition -DriveLetter C 
 $size = $drive.Size 
 $newSize = $size - (500MB + $partitionsize)
 $newSizeformatted = "{0:N2} Gb" -f ($newSize/ 1Gb)
-Write-Host "New c partition Size  : $newSizeformatted GB"
+Write-Host "New c partition Size  : $newSizeformatted "
+pause
 Resize-Partition -DriveLetter C -Size $newSize  
+pause
 
 #Stop the Shell HW Detection temporarily so that it doesnt prompt for format drive 
 Stop-Service -Name ShellHWDetection
  
 #Create a new partition called clonezilla with a size of 500 MB and format it as FAT32 
 New-Partition -DiskNumber 0 -Size 500MB -DriveLetter Y | Format-Volume -FileSystem FAT32 -NewFileSystemLabel "clonezilla" -Confirm:$False   
+pause
  
 #Create a new partition called backup with a size value of $partitionsize and format it as NTFS 
 New-Partition -DiskNumber 0 -Size $partitionsize -DriveLetter Z | Format-Volume -FileSystem NTFS -NewFileSystemLabel "backup" -Confirm:$False 
+pause
 
 #Start the Shell HW Detection which was disabled
 Start-Service -Name ShellHWDetection
