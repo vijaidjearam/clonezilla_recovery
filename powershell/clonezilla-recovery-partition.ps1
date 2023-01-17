@@ -1,4 +1,4 @@
-#Calculate the required space for recovery volume (allocating 1/3 of used space)
+#Calculate the required space for recovery volume (allocating 2/3 of used space)
 $Drive = "C:"
 $DriveInfo = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='$Drive'"
 $UsedSpace = ($DriveInfo.Size - $DriveInfo.FreeSpace)
