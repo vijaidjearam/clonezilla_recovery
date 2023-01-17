@@ -12,7 +12,7 @@ pause
 #Shrink existing partition C to create new partitions
 $drive = Get-Partition -DriveLetter C 
 $size = $drive.Size 
-$newSize = $size - (500MB + $partitionsize)
+$newSize = $size - (500MB + $partitionsize) + 1GB
 $newSizeformatted = "{0:N2} Gb" -f ($newSize/ 1Gb)
 Write-Host "New c partition Size  : $newSizeformatted "
 pause
