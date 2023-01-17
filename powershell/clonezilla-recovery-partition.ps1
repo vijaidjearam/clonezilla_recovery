@@ -67,12 +67,12 @@ Copy-Item -Recurse -Path C:\temp\clonezilla-live\live -Destination y:\ -Force
 
 #Download the modified EFI and grub.cfg file from github repo
 $url = "https://codeload.github.com/vijaidjearam/clonezilla_recovery/zip/refs/heads/main"
-$fileName = "clonezilla_recovery.zip"
-Invoke-WebRequest -Uri $url -OutFile c:\temp\$fileName
+#$fileName = "clonezilla_recovery.zip"
+Invoke-WebRequest -Uri $url -OutFile c:\temp\clonezilla_recovery.zip
 
 #Extract the files and remove the zip file
-Expand-Archive -LiteralPath c:\temp\$fileName -DestinationPath C:\temp\clonezilla_recovery
-Remove-Item C:\temp\$fileName
+Expand-Archive -LiteralPath c:\temp\clonezilla_recovery.zip -DestinationPath C:\temp\clonezilla_recovery
+Remove-Item C:\temp\clonezilla_recovery.zip
 
 #Copy the necessary files to clonezilla partition Y:\EFI\boot
 Copy-Item -Recurse -Path C:\temp\clonezilla_recovery\clonezilla_recovery-main\Tut142_CloneZilla_UEFI_Restore\* -Destination Y:\EFI\boot\ -Force
