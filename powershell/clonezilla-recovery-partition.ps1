@@ -1,10 +1,10 @@
-#Calculate the required space for recovery volume (allocating 2/3 of used space)
+#Calculate the required space for recovery volume (allocating 2/3 of used space +5GB)
 $Drive = "C:"
 $DriveInfo = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='$Drive'"
 $UsedSpace = ($DriveInfo.Size - $DriveInfo.FreeSpace)
 $usedspaceformatted = "{0:N2} Gb" -f ($UsedSpace/ 1Gb)
 Write-Host "Used Space on $Drive : $usedspaceformatted"
-$partitionsize = $UsedSpace*(2/3) 
+$partitionsize = $UsedSpace*(2/3) + 5GB
 $partitionsizeformatted = "{0:N2} Gb" -f ($partitionsize/ 1Gb)
 Write-Host "Partition Space for recovery : $partitionsizeformatted"
 pause
