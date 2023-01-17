@@ -12,7 +12,7 @@ pause
 #Shrink existing partition C to create new partitions
 $drive = Get-Partition -DriveLetter C 
 $size = $drive.Size 
-$newSize = $size - (500MB + $partitionsize) + 1GB
+$newSize = $size - (500MB + $partitionsize)
 $newSizeformatted = "{0:N2} Gb" -f ($newSize/ 1Gb)
 Write-Host "New c partition Size  : $newSizeformatted "
 pause
@@ -27,7 +27,7 @@ New-Partition -DiskNumber 0 -Size 500MB -DriveLetter Y | Format-Volume -FileSyst
 pause
  
 #Create a new partition called backup with a size value of $partitionsize and format it as NTFS 
-New-Partition -DiskNumber 0 -Size $partitionsize -DriveLetter Z | Format-Volume -FileSystem NTFS -NewFileSystemLabel "backup" -Confirm:$False 
+New-Partition -DiskNumber 0 –UseMaximumSize -DriveLetter Z | Format-Volume -FileSystem NTFS -NewFileSystemLabel "backup" -Confirm:$False 
 pause
 
 #Start the Shell HW Detection which was disabled
