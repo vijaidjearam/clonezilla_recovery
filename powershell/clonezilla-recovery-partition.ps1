@@ -15,7 +15,6 @@ $size = $drive.Size
 $newSize = $size - (500MB + $partitionsize)
 $newSizeformatted = "{0:N2} Gb" -f ($newSize/ 1Gb)
 Write-Host "New c partition Size  : $newSizeformatted "
-pause
 Resize-Partition -DriveLetter C -Size $newSize  
 
 
