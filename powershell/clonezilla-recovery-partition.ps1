@@ -58,7 +58,7 @@ $fileName = "clonezilla-live.zip"
 Invoke-WebRequest -Uri $url -OutFile c:\temp\$fileName
 
 #extract clonezilla.zip and remove zip file
-Expand-Archive -LiteralPath 'C:\temp\clonezilla-live.zip' -DestinationPath C:\temp\clonezilla-live
+Expand-Archive -LiteralPath "C:\temp\clonezilla-live.zip" -DestinationPath C:\temp\clonezilla-live
 Remove-Item C:\temp\clonezilla-live.zip
 
 #copy clonezilla EFI and Live system folders from the extracted location to Clonezilla partition
