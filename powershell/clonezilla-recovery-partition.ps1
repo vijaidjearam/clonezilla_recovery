@@ -66,8 +66,8 @@ Copy-Item -Recurse -Path C:\temp\clonezilla-live\EFI -Destination y:\ -Force
 Copy-Item -Recurse -Path C:\temp\clonezilla-live\live -Destination y:\ -Force
 
 #Download the modified EFI and grub.cfg file from github repo
-$url = 'https://codeload.github.com/vijaidjearam/clonezilla_recovery/zip/refs/heads/main'
-$fileName = 'clonezilla_recovery.zip'
+$url = "https://codeload.github.com/vijaidjearam/clonezilla_recovery/zip/refs/heads/main"
+$fileName = "clonezilla_recovery.zip"
 Invoke-WebRequest -Uri $url -OutFile c:\temp\$fileName
 
 #Extract the files and remove the zip file
