@@ -205,22 +205,9 @@ insmod play
 
 # Since no network setting in the squashfs image, therefore if ip=, the network is disabled.
 
-menuentry "Restore Image BIB-HP-Pret-Etudiant" --id live-default {
+menuentry "Restore Image BIB-HP-Probook-Pret-Etudiant" --id live-default {
   search --set -f /live/vmlinuz
   $linux_cmd /live/vmlinuz boot=live union=overlay username=user config components quiet loglevel=0 noswap edd=on nomodeset noprompt enforcing=0 noeject locales=fr_FR.UTF-8 keyboard-layouts=fr ocs_live_run="ocs-sr -g auto -e1 auto -e2 -r -j2 -c -k0 -scr -p reboot restoredisk 2023-01-18-12-hp-pret-portable-etud-hp-probook nvme0n1" ocs_prerun1="dhclient -v eth0" ocs_prerun2="sleep 2" ocs_prerun3="mount -t cifs -o user=${cifsusername},password=${cifspasswd} ${cifsshare} /home/partimag" ocs_prerun4="sleep 2" vga=788 ip= net.ifnames=0  nosplash i915.blacklist=yes radeonhd.blacklist=yes nouveau.blacklist=yes vmwgfx.enable_fbdev=1
   $initrd_cmd /live/initrd.img
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
