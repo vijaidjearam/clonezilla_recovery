@@ -109,6 +109,13 @@ create a clonezilla live usb:
 
 Replace the grub.cfg in /boot/grub.cfg with the following code:
 
+Please fill the appropriate credentials to connect to the sambashare, UNC path, also the image filename.
+
+![image](https://user-images.githubusercontent.com/1507737/214266408-4facc71b-3f90-428d-b8de-31cdfa9ded75.png)
+
+![image](https://user-images.githubusercontent.com/1507737/214266539-d11f81b9-457c-4843-b069-0c48adab9c6d.png)
+
+
 ```
 #Automate Restore of clonezilla from samba share
 insmod cifs
