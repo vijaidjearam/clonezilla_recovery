@@ -2,7 +2,7 @@
 
 After install windows and application
 
-Launch the batch script *"clonezilla_recovery_partition_creator.bat"* located inclonezilla_recovery/powershell.
+Launch the powershell script *"clonezilla_recovery_partition_creator.bat"* located inclonezilla_recovery/powershell.
 
 This script would create two partitions 
 
@@ -73,7 +73,16 @@ select the option [W] Auto-Backup windows to the partition *Backup/images*
 
 To restore from backup, select [Q] Auto-Restore Windows from backup stored in the partition *Backup/images*
 
+At the end you need to hide the partition clonezilla and images so that partitions are not exposed to the user.
 
+using the #DISKPART# command hide the partitions
+
+```
+diskpart
+# In my case the volume 1 is clonezilla , so please select the appropriate volume for your scenario
+select volume 1 
+ATTRIBUTE
+```
 
 
 
