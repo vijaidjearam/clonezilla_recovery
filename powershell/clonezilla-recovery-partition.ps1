@@ -77,3 +77,10 @@ Copy-Item -Recurse -Path C:\temp\clonezilla_recovery\clonezilla_recovery-main\Tu
 
 # removing the temp folder
 Remove-Item -Recurse -Path C:\temp -Force
+
+#checking if the disk is NVME or SSD or HDD and changing the grub.cfg accordingly
+if (-Not ((Get-PhysicalDisk| Where-Object {$_.DeviceId -eq 0}).BusType) -like "NVMe")
+{
+Remove-Item -Path Y:\EFI\boot\grub.cfg -Force
+Rename-Item -Path Y:\EFI\boot\grub-sda.cfg -NewName grub.cfg -Force
+}
