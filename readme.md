@@ -211,3 +211,11 @@ menuentry "Restore Image BIB-HP-Probook-Pret-Etudiant" --id live-default {
   $initrd_cmd /live/initrd.img
 }
 ```
+
+# If the Bitlocker is enabled or waiing for activation , use the following command to disable Bitlocker only then GRUB can read the Partition
+
+```
+manage-bde c: -off
+```
+
+if the deecryption is started please wait untill the process get completed using the manage-bde status command.
