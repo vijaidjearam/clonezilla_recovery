@@ -19,7 +19,7 @@ Resize-Partition -DriveLetter C -Size $newSize
 
 
 #Stop the Shell HW Detection temporarily so that it doesnt prompt for format drive 
-Stop-Service -Name ShellHWDetection
+Stop-Service -Name ShellHWDetection -force -confirm
  
 #Create a new partition called clonezilla with a size of 500 MB and format it as FAT32 
 New-Partition -DiskNumber 0 -Size 500MB -DriveLetter Y | Format-Volume -FileSystem FAT32 -NewFileSystemLabel "clonezilla" -Confirm:$False   
