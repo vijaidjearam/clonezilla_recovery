@@ -100,4 +100,6 @@ diskpart /s $env:temp\clonezilla-part-to-recovery.txt
 Remove-Item $env:temp\clonezilla-part-to-recovery.txt -Force
 
 # downloading the diskpart script for making the backup partition -> recovery partition
+Start-BitsTransfer -source https://raw.githubusercontent.com/vijaidjearam/clonezilla_recovery/main/powershell/backup-part-to-recovery.txt -Destination $env:temp\backup-part-to-recovery.txt
+
 
