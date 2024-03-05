@@ -20,7 +20,7 @@ Resize-Partition -DriveLetter C -Size $newSize
 
 #Stop the Shell HW Detection temporarily so that it doesnt prompt for format drive 
 #Need to try suspend-service -Name ShellHWDetection -Confirm
-Stop-Service -Name ShellHWDetection -force -confirm
+Stop-Service -Name ShellHWDetection -force 
  
 #Create a new partition called clonezilla with a size of 500 MB and format it as FAT32 
 New-Partition -DiskNumber 0 -Size 500MB -DriveLetter Y | Format-Volume -FileSystem FAT32 -NewFileSystemLabel "clonezilla" -Confirm:$False   
@@ -55,7 +55,8 @@ $latest = ($links | Sort-Object -Property href -Descending)[0]
 $ver = $latest.href | % {$_ -match "\d.\d.\d-\d{2}" > $null; $matches[0]}
 $url = "https://netix.dl.sourceforge.net/project/clonezilla/clonezilla_live_stable/"+$ver+"/clonezilla-live-"+$ver+"-amd64.zip"
 $fileName = "clonezilla-live.zip"
-Invoke-WebRequest -Uri $url -OutFile c:\temp\$fileName
+#Invoke-WebRequest -Uri $url -OutFile c:\temp\$fileName
+Start-BitsTransfer -Source $url -Destination c:\temp\$fileName
 
 #extract clonezilla.zip and remove zip file
 Expand-Archive -LiteralPath "C:\temp\clonezilla-live.zip" -DestinationPath C:\temp\clonezilla-live
@@ -67,7 +68,8 @@ Copy-Item -Recurse -Path C:\temp\clonezilla-live\live -Destination y:\ -Force
 
 #Download the modified EFI and grub.cfg file from github repo
 $url = "https://codeload.github.com/vijaidjearam/clonezilla_recovery/zip/refs/heads/main"
-Invoke-WebRequest -Uri $url -OutFile c:\temp\clonezilla_recovery.zip
+#Invoke-WebRequest -Uri $url -OutFile c:\temp\clonezilla_recovery.zip
+Start-BitsTransfer -Source $url -Destination c:\temp\clonezilla_recovery.zip
 
 #Extract the files and remove the zip file
 Expand-Archive -LiteralPath c:\temp\clonezilla_recovery.zip -DestinationPath C:\temp\clonezilla_recovery
@@ -80,7 +82,7 @@ Copy-Item -Recurse -Path C:\temp\clonezilla_recovery\clonezilla_recovery-main\Tu
 Remove-Item -Recurse -Path C:\temp -Force
 
 #checking if the disk is NVME or SSD or HDD and changing the grub.cfg accordingly
-if (-Not ((Get-PhysicalDisk| Where-Object {$_.DeviceId -eq 0}).BusType) -like "NVMe")
+if (-Not ((Get-PhysicalDisk| Where-Object {($_.DeviceId -eq 0)}).BusType -like "NVMe"))
 {
 write-host "The local disk is SSD so modifying the grub.cfg accordingly"
 Remove-Item -Path Y:\EFI\boot\grub.cfg -Force
