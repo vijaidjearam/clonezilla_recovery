@@ -1,0 +1,4 @@
+sel vol 1
+remove letter=Y
+set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+gpt attributes=0x9000000000000001    
