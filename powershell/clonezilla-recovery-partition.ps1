@@ -96,8 +96,8 @@ write-host "The local disk is NVMe so modifying the grub.cfg accordingly"
 # converting the clonezilla partition to recovery partition
 ## downloading the diskpart script txt file from github 
 Start-BitsTransfer -Source https://raw.githubusercontent.com/vijaidjearam/clonezilla_recovery/main/powershell/clonezilla-part-to-recovery.txt -Destination $env:temp\clonezilla-part-to-recovery.txt
-diskpart /s $env:temp\clonezilla-part-to-recovery.txt
-Remove-Item $env:temp\clonezilla-part-to-recovery.txt -Force
+#diskpart /s $env:temp\clonezilla-part-to-recovery.txt
+#Remove-Item $env:temp\clonezilla-part-to-recovery.txt -Force
 
 ## downloading the diskpart script for making the backup partition -> recovery partition
 Start-BitsTransfer -source https://raw.githubusercontent.com/vijaidjearam/clonezilla_recovery/main/powershell/backup-part-to-recovery.txt -Destination $env:temp\backup-part-to-recovery.txt
